@@ -1,0 +1,16 @@
+name = "mohan satya naga sudhir"
+
+new_name = ''
+
+split1 = name.split(" ")
+
+for i in split1:
+    uname = ''
+    for index, value in enumerate(i):
+        if index%2 == 0 and index!=0:
+            uname = uname + value.upper()
+        else:
+            uname = uname+value
+    new_name = new_name + uname + ' '
+
+print(new_name)
