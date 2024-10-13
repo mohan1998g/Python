@@ -8,3 +8,10 @@ print(dict.items())
 Highest_scorer = max(dict.items(), key=lambda x: x[1])
 
 print("Highest run scorer is: ", Highest_scorer)
+
+S1 = max(dict , key= lambda x: dict(x))
+print (S1)
+
+
+Keymax = max(zip(dict.values(), dict.keys()))[1]
+print(Keymax)
