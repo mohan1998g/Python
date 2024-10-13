@@ -5,3 +5,10 @@ a = [1,1,2,2,3,3,3,3]
 dict_a = dict(Counter(a))
 
 print(dict_a)
+
+--------------------------------------------
+
+# Convert to dictionary where keys are the elements, and values are their counts
+result = {x: a.count(x) for x in set(a)}
+
+print(result)
