@@ -1,3 +1,10 @@
 dict = {"virat": 100, "dhoni": 60, "sachin": 120, "klrahul": 45}
+
+print(dict.items())
+
+# .items() flattens the dictionary data
+# the output will be dict_items([('virat', 100), ('dhoni', 60), ('sachin', 120), ('klrahul', 45)])
+
 Highest_scorer = max(dict.items(), key=lambda x: x[1])
+
 print("Highest run scorer is: ", Highest_scorer)
