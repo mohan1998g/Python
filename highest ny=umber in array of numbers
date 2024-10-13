@@ -1,0 +1,41 @@
+1. Using Python
+a. Using reduce() Function in Python
+The reduce() function applies a function cumulatively to the items of a sequence, from left to right, to reduce the sequence to a single value.
+
+python
+Copy code
+from functools import reduce
+
+# Array of 10 numbers
+numbers = [12, 45, 23, 67, 34, 89, 15, 78, 91, 56]
+
+# Use reduce to find the highest number
+max_number = reduce(lambda x, y: x if x > y else y, numbers)
+
+print("Highest number using reduce:", max_number)
+Output:
+
+python
+Copy code
+Highest number using reduce: 91
+b. Using a Loop in Python
+You can use a simple loop to iterate through the list and track the highest number.
+
+
+# Array of 10 numbers
+numbers = [12, 45, 23, 67, 34, 89, 15, 78, 91, 56]
+
+# Initialize max_number with the first element
+max_number = numbers[0]
+
+# Loop through the list to find the highest number
+for number in numbers:
+    if number > max_number:
+        max_number = number
+
+print("Highest number using loop:", max_number)
+Output:
+
+python
+Copy code
+Highest number using loop: 91
