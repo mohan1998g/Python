@@ -1,0 +1,7 @@
+from collections import Counter
+
+a = [1,1,2,2,3,3,3,3]
+
+dict_a = dict(Counter(a))
+
+print(dict_a)
