@@ -1,0 +1,28 @@
+To achieve the desired output, you can solve the problem by splitting the input list into sublists, each containing 4 elements. The last sublist can have fewer than 4 elements if the number of elements in the list is not a multiple of 4.
+
+Python Code:
+python
+Copy code
+def split_list(input_list, chunk_size):
+    # Split the list into chunks of specified size
+    return [input_list[i:i + chunk_size] for i in range(0, len(input_list), chunk_size)]
+
+# Input list
+input_list = [1, 2, 3, 4, 5, 4, 6, 77, 8, 9, 11, 10, 12]
+
+# Chunk size (4 in this case)
+chunk_size = 4
+
+# Split the list
+output_list = split_list(input_list, chunk_size)
+
+# Output the result
+print(output_list)
+Output:
+lua
+Copy code
+[[1, 2, 3, 4], [5, 4, 6, 77], [8, 9, 11, 10], [12]]
+Explanation:
+The function split_list takes two parameters: the input_list and the desired chunk size (chunk_size).
+The list comprehension breaks the input list into chunks of 4 elements each by iterating over the list with a step of 4.
+The last sublist will have fewer elements if the length of the input list is not divisible by 4.
