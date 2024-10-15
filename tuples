@@ -27,6 +27,16 @@ You can also create a tuple without using parentheses, by just separating values
 my_tuple = 1, 2, 3
 print(my_tuple)  # Output: (1, 2, 3)
 
+Slicing:
+
+tuple[start:end]  -->  from index start to (end-1)
+
+tuple[start:]  ---> from index start to end of the list
+
+tuple[:end] -->  from index 0 to end-1
+
+tuple[:]  --> copy of whole array
+
 
 3. Accessing Tuple Elements
 Indexing:
