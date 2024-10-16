@@ -1,0 +1,13 @@
+a=(1,2,2,8,4,4,7,7,8,3,2,6,0,9)
+unique=set()
+
+duplicates=set()
+
+for item in a:
+    if item in unique:
+        duplicates.add(item)
+    else:
+        unique.add(item)
+
+print()
+print(f"Duplicate elements:  {list(duplicates)}")
