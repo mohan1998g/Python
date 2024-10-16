@@ -1,0 +1,5 @@
+input = "welcome to comcast"
+
+a=input[0:7][::-1] + input[7:11][::-1] + input[11:18][::-1]
+
+print(a)
