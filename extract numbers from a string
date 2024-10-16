@@ -1,0 +1,10 @@
+import re
+def extract_numbers(input_str):
+    return re.sub('[^0-9]', '', input_str)
+
+
+input_str1 = "jhhhd999jdfj77jjj7"
+input_str2 = "hhhh87fdfhh23fkd8"
+
+print(extract_numbers(input_str1))  # Output: 9977
+print(extract_numbers(input_str2))  # Output: 8738
