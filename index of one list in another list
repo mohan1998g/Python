@@ -1,0 +1,7 @@
+a = [12, 28, 46, 32, 50]
+
+b = [50, 12, 32, 46, 28]
+
+output = [b.index(x) for x in a]
+
+print(output)  
