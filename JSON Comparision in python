@@ -1,0 +1,114 @@
+Compare two JSON objects (Python)
+Abed MAATALLA
+Abed MAATALLA
+
+·
+Follow
+
+4 min read
+·
+Aug 4, 2022
+18
+
+
+
+
+In this short article, we will see quick and easiest way to perform comparison on Json object in python:
+
+
+Comparing two json object, return ‘True’ if both json are same otherwise
+‘False’
+Edge case of comparing json objects using “==”
+If two json are not equal then find the exact difference.
+1. Comparing Json:
+Comparing json is quite simple, we can use ‘==’ operator,
+
+
+
+Note: ‘==’ and ‘is’ operator are not same, ‘==’ operator is use to check equality of values , whereas ‘is’ operator is used to check reference equality, hence one should use ‘==’ operator, ‘is’ operator will not give expected result.
+
+2. Edge case of comparing Json object using “==”:
+Comparing two dictionaries has been solved in the first part of this articles. Now let’s image we have the following dicts to compare :
+
+Dict 1 :
+
+{
+    "errors": [
+        {"error": "invalid", "field": "email"},
+        {"error": "required", "field": "name"}
+    ],
+    "success": false
+}
+Dict 2 :
+
+{
+    "success": false,
+    "errors": [
+        {"error": "required", "field": "name"},
+        {"error": "invalid", "field": "email"}
+    ]
+}
+>>> dict1 == dict2
+False
+let’s decode them and compare. Order does not matter for dictionary as long as the keys, and values matches. (Dictionary has no order in Python)
+
+>>> {'a': 1, 'b': 2} == {'b': 2, 'a': 1}
+True
+But order is important in list; sorting will solve the problem for the lists.
+
+>>> [1, 2] == [2, 1]
+False
+>>> [1, 2] == sorted([2, 1])
+True
+>>> a = '{"errors": [{"error": "invalid", "field": "email"}, {"error": "required", "field": "name"}], "success": false}'
+>>> b = '{"errors": [{"error": "required", "field": "name"}, {"error": "invalid", "field": "email"}], "success": false}'
+>>> a, b = json.loads(a), json.loads(b)
+>>> a['errors'].sort()
+>>> b['errors'].sort()
+>>> a == b
+True
+Above example will work for the JSON in the question.
+
+3. Difference in Jsons:
+Finding exact difference in two json sounds difficult task, it may become even more difficult, if we try to find differences in nested jsons. Programmatically, one can write a small piece of code which would iterate every keys of json and pick the differences, but this work will become very difficult if we don’t know how nested the json is. But, we don’t really have to worry of writing code and all, This is where deepdiff comes in handy. Deepdiff is a powerful python library to compare 2 dictionaries. What makes it powerful is that, during the comparison, deepdiff does not consider the order in which the elements inside the dictionaries are present.
+Let’s see deepdiff in action :
+
+1.Elements newly added.
+
+2. Elements removed.
+
+3. Elements whose values changed.
+
+Consider below example, jsn_1 contains three items with keys ‘a’,’b’,’c’ respectively, in jsn_2 below changes has been done:
+
+a. Element ‘c’ is removed.
+
+b. Element ‘e’ and ‘d’ added.
+
+c. Value of key ‘b’ has changed.
+
+
+DeepDiff function of deepdiff module returns all the changes, let's find all differences using deepdiff:
+
+
+Output: result is a dictionary which contains all differences.
+
+Result
+Elements Added:
+
+
+Elements newly added
+Elements Removed:
+
+
+Elements removed
+Values changed:
+
+
+Key whose value changed
+Conclusion:
+
+We have seen easiest way to compare and find the differences in json objects.
+‘==’ is used for comparing json.
+Dictionary has no order in Python but order is important in list
+DeepDiff function of deepdiff library can be leveraged to find differences.
