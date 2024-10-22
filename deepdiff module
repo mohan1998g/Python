@@ -1,0 +1,201 @@
+Overview of DeepDiff
+DeepDiff is a powerful Python library used for finding differences between complex Python objects. These objects can include dictionaries, lists, sets, tuples, strings, and more. DeepDiff is particularly useful for comparing nested structures like JSON objects, dictionaries, or other complex data structures. It can handle various types of changes, including value changes, type changes, item additions, removals, and more.
+
+Installation
+To install DeepDiff, run:
+
+bash
+Copy code
+pip install deepdiff
+Key Features
+Compare complex nested structures like dictionaries, lists, and sets.
+Track changes such as additions, removals, updates, and type changes.
+Customizable: Fine-tune what changes you want to track (e.g., ignore specific fields).
+Detailed differences: Shows the exact location of differences in nested structures.
+Handle floats: Allows comparison of float values with precision control.
+Core Functionalities
+DeepDiff: The main function for deep comparison.
+Delta: Applies the difference from DeepDiff to another object.
+DeepHash: A utility for hashing complex objects.
+DeepSearch: Allows searching through complex data structures for a specific value or type.
+DeepCopy: For deep copying complex structures.
+Basic Usage
+Here are some basic examples of how to use DeepDiff:
+
+1. Basic Dictionary Comparison
+python
+Copy code
+from deepdiff import DeepDiff
+
+dict1 = {'name': 'John', 'age': 30}
+dict2 = {'name': 'John', 'age': 31}
+
+diff = DeepDiff(dict1, dict2)
+print(diff)
+Output:
+
+python
+Copy code
+{'values_changed': {"root['age']": {'new_value': 31, 'old_value': 30}}}
+2. Comparing Lists
+python
+Copy code
+list1 = [1, 2, 3]
+list2 = [1, 2, 4]
+
+diff = DeepDiff(list1, list2)
+print(diff)
+Output:
+
+python
+Copy code
+{'values_changed': {"root[2]": {'new_value': 4, 'old_value': 3}}}
+3. Nested Data Structures (e.g., JSON)
+python
+Copy code
+nested_dict1 = {'user': {'name': 'John', 'age': 30, 'hobbies': ['reading', 'running']}}
+nested_dict2 = {'user': {'name': 'John', 'age': 31, 'hobbies': ['reading', 'cycling']}}
+
+diff = DeepDiff(nested_dict1, nested_dict2)
+print(diff)
+Output:
+
+python
+Copy code
+{
+    'values_changed': {"root['user']['age']": {'new_value': 31, 'old_value': 30}},
+    'iterable_item_removed': {"root['user']['hobbies'][1]": 'running'},
+    'iterable_item_added': {"root['user']['hobbies'][1]": 'cycling'}
+}
+4. Handling Set Differences
+python
+Copy code
+set1 = {1, 2, 3}
+set2 = {1, 2, 4}
+
+diff = DeepDiff(set1, set2)
+print(diff)
+Output:
+
+python
+Copy code
+{
+    'set_item_removed': {3},
+    'set_item_added': {4}
+}
+Advanced Features
+1. Ignore Specific Fields
+You can ignore specific fields or paths during comparison.
+
+python
+Copy code
+dict1 = {'name': 'John', 'age': 30}
+dict2 = {'name': 'John', 'age': 31}
+
+diff = DeepDiff(dict1, dict2, exclude_paths="root['age']")
+print(diff)
+Output:
+
+python
+Copy code
+{}
+2. Tolerances for Floats
+You can set a tolerance for comparing floating-point numbers:
+
+python
+Copy code
+float1 = {'value': 1.0001}
+float2 = {'value': 1.0002}
+
+diff = DeepDiff(float1, float2, significant_digits=3)
+print(diff)
+Output:
+
+python
+Copy code
+{}
+3. Comparing Types
+DeepDiff can also compare the types of values:
+
+python
+Copy code
+dict1 = {'value': 1}
+dict2 = {'value': '1'}
+
+diff = DeepDiff(dict1, dict2)
+print(diff)
+Output:
+
+python
+Copy code
+{'type_changes': {"root['value']": {'old_type': <class 'int'>, 'new_type': <class 'str'>, 'old_value': 1, 'new_value': '1'}}}
+4. Applying Deltas
+The Delta class allows you to apply the differences found by DeepDiff to another object:
+
+python
+Copy code
+from deepdiff import DeepDiff, Delta
+
+obj1 = {"a": 1, "b": 2}
+obj2 = {"a": 1, "b": 3}
+diff = DeepDiff(obj1, obj2)
+
+delta = Delta(diff)
+new_obj = delta.apply(obj1)
+print(new_obj)  # {'a': 1, 'b': 3}
+5. Hashing Complex Objects
+DeepHash helps you create hash values of complex nested structures:
+
+python
+Copy code
+from deepdiff import DeepHash
+
+obj = {'name': 'John', 'hobbies': ['reading', 'running']}
+hashed_obj = DeepHash(obj)
+print(hashed_obj)
+Output:
+
+python
+Copy code
+{140000000: 'e9f43a1e486b3b2e622f1459e44e6bc7'}
+6. Searching Through Data
+You can search for a specific value within complex data structures:
+
+python
+Copy code
+from deepdiff import DeepSearch
+
+data = {"person": {"name": "John", "age": 30}}
+search = DeepSearch(data, "John")
+print(search)
+Output:
+
+python
+Copy code
+{'matched_values': {"root['person']['name']": 'John'}}
+Configurable Parameters
+DeepDiff provides a wide range of options to fine-tune its behavior:
+
+exclude_paths: Ignore specific paths in the object comparison.
+exclude_types: Ignore changes to certain types of objects.
+significant_digits: Control the precision for comparing floats.
+ignore_order: Ignore the order of elements in lists, tuples, or sets.
+ignore_string_case: Ignore case differences in strings.
+report_repetition: Identify repeated items in sequences.
+ignore_type_in_groups: Ignore types of elements within specific data groups.
+view: Controls how the results are displayed (text, tree, delta).
+Output Structure
+DeepDiff outputs results in a structured format where the keys represent the type of change, and the values show the location and details of the change. The common change types include:
+
+values_changed: Indicates that a value was changed.
+type_changes: Indicates that the type of a value changed.
+iterable_item_added: Indicates an item was added to an iterable.
+iterable_item_removed: Indicates an item was removed from an iterable.
+set_item_added: Indicates an item was added to a set.
+set_item_removed: Indicates an item was removed from a set.
+dictionary_item_added: Indicates a key-value pair was added to a dictionary.
+dictionary_item_removed: Indicates a key-value pair was removed from a dictionary.
+Summary
+DeepDiff is a flexible and powerful library for deep comparisons of Python objects, handling complex and nested structures.
+It provides a wide variety of customization options to control how differences are detected, including ignoring certain paths, setting precision for floats, and handling order in sequences.
+DeepDiff is easy to use for common Python data structures such as dictionaries, lists, and sets, and outputs detailed information on the differences between objects.
