@@ -1,0 +1,12 @@
+SQLAlchemy is a  SQL toolkit and ORM library for Python that simplifies database interactions. 
+
+- ORM Functionality: Treats database tables as Python objects.
+- SQL Expression Language: Builds SQL queries programmatically.
+- Database Agnostic: Supports PostgreSQL, MySQL, SQLite, Oracle, and more.
+- Connection Pooling: Enhances performance with efficient connection management.
+- Schema Migration Tools: Uses extensions like Alembic for managing schema changes.
+- Advanced Querying: Includes features for complex queries, joins, and filtering.
+- Flexible Data Mapping: Maps database tables to Python classes.
+- Transaction Management: Ensures data integrity through transaction tools.
+
+SQLAlchemy is widely used in web frameworks like Flask and Django ORM, ideal for complex database operations and multiple database systems.
